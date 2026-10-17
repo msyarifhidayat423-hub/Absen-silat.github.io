@@ -34,14 +34,5 @@ const db = getDatabase(app);
 
 // 4. EKSPOR FUNGSI
 // Ekspor ini wajib agar file login.js, data-siswa.js, absensi.js, dan dokumentasi.js bisa menggunakan Firebase
-export {
-    db,
-    ref,
-    get,
-    set,
-    update,
-    push,
-    child,
-    onValue,
-    remove
-};
+export { db, ref, get, set, update, push, child, onValue, remove };
+
