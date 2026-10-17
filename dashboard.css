@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+}
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 250px;
+    background-color: #1e293b;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
+
+.sidebar-header h2 {
+    font-size: 24px;
+    color: #38bdf8;
+}
+
+.sidebar-header p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.nav-btn:hover {
+    background-color: #334155;
+    color: white;
+}
+
+.nav-btn.active {
+    background-color: #334155;
+    color: #38bdf8;
+    border-left: 4px solid #38bdf8;
+}
+
+.sidebar-footer {
+    padding: 20px;
+}
+
+.logout-btn {
+    width: 100%;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.content-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* --- CSS UNTUK FORM & TABEL --- */
+.form-card h3,
+.table-card h3 {
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-row .input-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background: #0ea5e9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #0284c7;
+}
+
+/* Tabel */
+.table-responsive {
+    overflow-x: auto;
+}
+
+#tabel-siswa {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+#tabel-siswa th,
+#tabel-siswa td {
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+#tabel-siswa th {
+    background-color: #f8fafc;
+    color: #475569;
+}
+
+#tabel-siswa img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    background: #eee;
+}
+
+/* Tombol & Status Badge */
+.badge-aktif {
+    background: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-vakum {
+    background: #64748b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.btn-warning {
+    background: #f59e0b;
+}
+
+.btn-warning:hover {
+    background: #d97706;
+}
+
+.btn-danger {
+    background: #ef4444;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}

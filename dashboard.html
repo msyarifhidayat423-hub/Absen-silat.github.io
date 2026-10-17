@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Absensi Pencak Silat</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!-- PROTEKSI LOGIN -->
+    <script>
+        // Cek apakah ada sesi login. Jika tidak ada, tendang kembali ke index.html
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.replace('index.html');
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+        <!-- SIDEBAR MENU -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>PS Admin</h2>
+                <p>Pelatih Pencak Silat</p>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="data-siswa">Data Siswa</button>
+                <button class="nav-btn" data-target="absensi">Absensi Harian</button>
+                <button class="nav-btn" data-target="dokumentasi">Dokumentasi</button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="btn-logout" class="nav-btn logout-btn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- KONTEN UTAMA -->
+        <main class="main-content">
+
+            <!-- 1. HALAMAN DATA SISWA -->
+            <section id="data-siswa" class="content-section active-section">
+                <h2>Manajemen Data Siswa</h2>
+
+                <!-- Form Tambah Siswa -->
+                <div class="card form-card">
+                    <h3>Tambah Siswa Baru</h3>
+                    <form id="form-tambah-siswa">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" id="nama_siswa" required placeholder="Masukkan Nama">
+                            </div>
+                            <div class="input-group">
+                                <label>Kelas</label>
+                                <select id="kelas_siswa" required>
+                                    <option value="Pemula">Pemula</option>
+                                    <option value="Prestasi / Tanding">Prestasi / Tanding</option>
+                                    <option value="Seni">Seni</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Usia (Tahun)</label>
+                                <input type="number" id="usia_siswa" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Berat Badan (kg)</label>
+                                <input type="number" id="bb_siswa" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Tinggi Badan (cm)</label>
+                                <input type="number" id="tb_siswa" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>URL Foto (Opsional)</label>
+                            <input type="url" id="foto_siswa" placeholder="Paste link foto di sini">
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Data Siswa</button>
+                    </form>
+                </div>
+
+                <!-- Tabel Daftar Siswa -->
+                <div class="card table-card" style="margin-top: 20px;">
+                    <h3>Daftar Siswa</h3>
+                    <div class="table-responsive">
+                        <table id="tabel-siswa">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Kelas</th>
+                                    <th>Usia</th>
+                                    <th>Fisik (BB/TB)</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-siswa">
+                                <!-- Data siswa akan otomatis muncul di sini dari Firebase (melalui data-siswa.js) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. HALAMAN ABSENSI -->
+            <section id="absensi" class="content-section" style="display: none;">
+                <h2>Sistem Absensi Harian</h2>
+
+                <div class="card form-card">
+                    <div class="input-group" style="max-width: 300px;">
+                        <label>Pilih Tanggal Latihan</label>
+                        <input type="date" id="tanggal_absen">
+                        <button id="btn-load-absen" class="btn-primary" style="margin-top: 10px; width: 100%;">Tampilkan
+                            Data Absen</button>
+                    </div>
+                </div>
+
+                <div class="card table-card" style="margin-top: 20px;">
+                    <h3>Daftar Hadir</h3>
+                    <div class="table-responsive">
+                        <table id="tabel-absensi">
+                            <thead>
+                                <tr>
+                                    <th>Nama Lengkap</th>
+                                    <th>Kelas</th>
+                                    <th>Status Kehadiran</th>
+                                    <th>Aksi Simpan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-absensi">
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">Pilih tanggal terlebih dahulu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. HALAMAN DOKUMENTASI -->
+            <section id="dokumentasi" class="content-section" style="display: none;">
+                <h2>Galeri & Dokumentasi Kegiatan</h2>
+
+                <div class="card form-card">
+                    <h3>Tambah Dokumentasi</h3>
+                    <form id="form-dokumentasi">
+                        <div class="input-group">
+                            <label>Tanggal Kegiatan</label>
+                            <input type="date" id="tanggal_dokumentasi" required>
+                        </div>
+                        <div class="input-group">
+                            <label>URL Foto Kegiatan</label>
+                            <input type="url" id="url_foto_dokumentasi" required placeholder="Paste link foto di sini">
+                        </div>
+                        <button type="submit" class="btn-primary">Simpan Dokumentasi</button>
+                    </form>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3>Galeri Kegiatan</h3>
+                    <div class="input-group" style="max-width: 300px; margin-bottom: 15px;">
+                        <label>Lihat Foto Berdasarkan Tanggal:</label>
+                        <input type="date" id="filter_tanggal_dok">
+                    </div>
+                    <div id="galeri-container" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <!-- Foto akan muncul di sini -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- SCRIPT PENGHUBUNG -->
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="data-siswa.js"></script>
+    <script type="module" src="absensi.js"></script>
+    <script type="module" src="dokumentasi.js"></script>
+
+</body>
+
+</html>
